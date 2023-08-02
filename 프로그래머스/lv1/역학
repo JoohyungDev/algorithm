@@ -1,0 +1,54 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+fig, ax = plt.subplots()
+
+x = np.arange(-2.0, 2 , 0.001)
+y = x**2
+graph = plt.plot(x, y)
+
+redDot, = plt.plot([], [], 'ro')       #빨간 점 생성(초기값)
+list_x = []
+list_y = []
+
+#애니매이션 함수, 처음 이동
+def animate(i):
+    while True:
+        list_x.append(i)
+        list_y.append(i**2)
+        redDot.set_data(list_x, list_y)
+        return redDot,
+
+def frame():      # frame을 함수로 만들어서 반복문으로 왔다갔다 하려했으나 머리가 안돌아가서 패스..
+    arr = []
+    for i in np.arange(-1, 1, 0.1):
+        arr.append(i)
+    #     # if i == 1:
+    #     #     arr.append(i)
+    #     #     print(arr)
+    #     #     break
+    return arr
+
+
+    
+    
+# 라그랑주 사옹하면 a = -g가 나오는데 어떻게 써먹어야 할지 모르겠습니다.. g는 9.81인데..         
+    
+
+
+  
+#애니매이션 함수를 이용해 점 왔다갔다 생성
+#FuncAnimation의 첫번째 인자는 figure, 두 번째는 프레임마다 반복해서 호출할 함수,
+#frames 에는 반복 가능한 개체
+myAnimation = animation.FuncAnimation(fig, animate, frames=frame(), interval=10, repeat=False)
+plt.axis([-2, 2, 0, 2])
+plt.show()
+
+
+#myAnimation = animation.FuncAnimation(fig, animate, frames=frame(), interval=10, repeat=False)
+#myAnimation_1 = animation.FuncAnimation(fig, animate_back, frames=np.arange(2, -1, -0.1), interval=10, repeat=False)
+
+#myAnimation.save('ex16-1.gif', writer='imagemagick', fps=30, dpi=100)
+
+
